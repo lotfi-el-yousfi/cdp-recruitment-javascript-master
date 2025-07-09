@@ -1,5 +1,24 @@
 const { data } = require('./data');
 
+function countData(data) {
+  return data.map((country) => {
+    // Add count of people to country name
+    const peopleWithCounts = country.people.map((person) => {
+      // Add count of animals to person name
+      return {
+        ...person,
+        name: `${person.name} [${person.animals.length}]`,
+      };
+    });
+
+    return {
+      ...country,
+      name: `${country.name} [${peopleWithCounts.length}]`,
+      people: peopleWithCounts,
+    };
+  });
+}
+
 function main() {
   const args = process.argv.slice(2);
   let result = data;
